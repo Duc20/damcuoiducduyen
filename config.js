@@ -13,16 +13,16 @@ const weddingConfig = {
     // ==========================================
     couple: {
         groom: {
-            fullName: "Nguyễn Văn Công",           // Tên đầy đủ chú rể
-            firstName: "Văn Công",                 // Tên gọi ngắn
-            phone: "0999999999",                 // Số điện thoại (tùy chọn)
+            fullName: "Dương Hồng Đức",           // Tên đầy đủ chú rể
+            firstName: "Hồng Đức",                 // Tên gọi ngắn
+            phone: "0339230195",                 // Số điện thoại (tùy chọn)
             facebook: "",                        // Link Facebook (tùy chọn)
             instagram: "",                       // Link Instagram (tùy chọn)
         },
         bride: {
-            fullName: "Nguyễn Thị Thơ",          // Tên đầy đủ cô dâu
-            firstName: "Nguyễn Thơ",               // Tên gọi ngắn
-            phone: "0888888888",                 // Số điện thoại (tùy chọn)
+            fullName: "Nghiêm Thị Mỹ Duyên",          // Tên đầy đủ cô dâu
+            firstName: "Mỹ Duyên",               // Tên gọi ngắn
+            phone: "0964336786",                 // Số điện thoại (tùy chọn)
             facebook: "",                        // Link Facebook (tùy chọn)
             instagram: "",                       // Link Instagram (tùy chọn)
         }
@@ -33,14 +33,14 @@ const weddingConfig = {
     // ==========================================
     parents: {
         groom: {
-            father: "Ông Nguyễn Văn Chiến",           // Tên bố chú rể
-            mother: "Bà Nguyễn Thị Thảo",        // Tên mẹ chú rể
-            address: "Tư Thế, Trí Quả, Bắc Ninh" // Địa chỉ nhà trai
+            father: "Ông Dương Văn Dưỡng",           // Tên bố chú rể
+            mother: "Bà Nguyễn Thị Phương Oanh",        // Tên mẹ chú rể
+            address: "Thôn Nội, Văn Hoàng, Phú Xuyên, Hà Nội" // Địa chỉ nhà trai
         },
         bride: {
-            father: "Ông Nguyễn Văn Huấn",             // Tên bố cô dâu - THAY ĐỔI
-            mother: "Bà Nguyễn Thị Thi",              // Tên mẹ cô dâu - THAY ĐỔI
-            address: "Thuận Thành, Bắc Ninh" // Địa chỉ nhà gái - THAY ĐỔI
+            father: "Ông Nghiêm Văn Hải",             // Tên bố cô dâu - THAY ĐỔI
+            mother: "Bà Nguyễn Thị Hải Yến",              // Tên mẹ cô dâu - THAY ĐỔI
+            address: "Thôn Nội, Văn Hoàng, Phú Xuyên, Hà Nội" // Địa chỉ nhà gái - THAY ĐỔI
         }
     },
 
@@ -48,17 +48,17 @@ const weddingConfig = {
     // THÔNG TIN NGÀY CƯỚI
     // ==========================================
     wedding: {
-        date: "2025-11-30",                     // Định dạng: YYYY-MM-DD
-        time: "13:00",                          // Giờ tổ chức (24h format)
-        dayOfWeek: "Chủ Nhật",                   // Thứ trong tuần
-        lunarDate: "ngày 11 tháng 10 năm Ất Tỵ", // Âm lịch
+        date: "2026-10-15",                     // Định dạng: YYYY-MM-DD
+        time: "15:00",                          // Giờ tổ chức (24h format)
+        dayOfWeek: "Thứ Năm",                   // Thứ trong tuần
+        lunarDate: "ngày 06 tháng 09 năm Bính Ngọ", // Âm lịch
         
         // Hiển thị đẹp
         displayDate: {
-            day: "30",
-            month: "11",
-            year: "2025",
-            monthText: "Tháng 11"
+            day: "15",
+            month: "10",
+            year: "2026",
+            monthText: "Tháng 10"
         }
     },
 
@@ -67,15 +67,15 @@ const weddingConfig = {
     // ==========================================
     venue: {
         name: "Nhà Trai",               // Tên địa điểm
-        address: "Trí Quả",             // Địa chỉ chi tiết - THAY ĐỔI
-        district: "Thuận Thành",                   // Quận/Huyện - THAY ĐỔI
-        city: "Bắc Ninh",               // Thành phố
+        address: "Thôn Nội, Văn Hoàng",             // Địa chỉ chi tiết - THAY ĐỔI
+        district: "Phú Xuyên",                   // Quận/Huyện - THAY ĐỔI
+        city: "Hà Nội",               // Thành phố
         
         // Link Google Maps
-        googleMapsUrl: "https://maps.app.goo.gl/PP57rDnyXbgNEVbM8",
+        googleMapsUrl: "https://maps.app.goo.gl/rCuYeE6Qf1R8rABE6",
         
         // Embed Google Maps (lấy từ Google Maps > Share > Embed)
-        googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7176.46950918691!2d106.6573604!3d10.7965823!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529d96e56d9bd%3A0x205428f74d7f4ddb!2sThe%20ADORA%20Center!5e1!3m2!1svi!2s!4v1739789062931!5m2!1svi!2s"
+        googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d314.28717616055314!2d105.85054534174674!3d20.76592254882732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135b5b63876fe3d%3A0x51501cf14c3f5bcd!2zVEjDlE4gTuG7mEksIFBodW9uZyBEdWMsIEhhIE5vaSwgVmlldG5hbQ!5e1!3m2!1sen!2s!4v1790615254362!5m2!1sen!2s"
     },
 
     // ==========================================
@@ -108,14 +108,16 @@ const weddingConfig = {
     // NHẠC NỀN
     // ==========================================
     music: {
-        // TÙY CHỌN 1: File MP3 local
-        localFile: "",
-        
-        // TÙY CHỌN 2: Link YouTube
-        youtubeUrl: "https://www.youtube.com/watch?v=_8ldAdQd9WU&list=RD_8ldAdQd9WU&start_radio=1",  // THAY ĐỔI: Ví dụ: "https://www.youtube.com/watch?v=xxxxx"
-        
-        // TÙY CHỌN 3: Link MP3 trực tiếp
-        directUrl: ""    // THAY ĐỔI: Link MP3 từ Google Drive hoặc hosting khác
+        // TÙY CHỌN 1: File MP3 local (KHUYẾN NGHỊ - đang dùng)
+        localFile: "audio/I_Do.mp3",
+
+        // TÙY CHỌN 2: Link YouTube - KHÔNG DÙNG ĐƯỢC cho thẻ <audio>.
+        // update-wedding.js ưu tiên youtubeUrl nên để trống để không ghi đè sai src.
+        // Muốn dùng YouTube thì phải chuyển sang YouTube IFrame Player API.
+        youtubeUrl: "",
+
+        // TÙY CHỌN 3: Link MP3 trực tiếp (phải là URL file .mp3 thật, không phải trang watch)
+        directUrl: ""
     },
 
     // ==========================================
@@ -148,8 +150,8 @@ const weddingConfig = {
     // CÀI ĐẶT KHÁC
     // ==========================================
     settings: {
-        rsvpDeadline: "30/11/2025",            // Hạn xác nhận tham dự
-        maxGuests: 100,                         // Số khách tối đa mỗi người mời
+        rsvpDeadline: "15/10/2026",            // Hạn xác nhận tham dự
+        maxGuests: 200,                         // Số khách tối đa mỗi người mời
         showCountdown: true,                   // Hiển thị đếm ngược
         showGallery: true,                     // Hiển thị album ảnh
         showRSVP: true,                        // Hiển thị form xác nhận
@@ -168,9 +170,9 @@ const weddingConfig = {
     // METADATA (SEO)
     // ==========================================
     meta: {
-        title: "Thiệp Cưới - Công & Thơ",
-        description: "Thiệp cưới online của Công & Thơ - 30.11.2025",
-        keywords: "thiệp cưới, wedding invitation, Công, Thơ",
+        title: "Thiệp Cưới - Đức & Duyên",
+        description: "Thiệp cưới online của Đức & Duyên - 15.10.2026",
+        keywords: "thiệp cưới, wedding invitation, Đức, Duyên",
         author: "Happy Wedding"
     }
 };
