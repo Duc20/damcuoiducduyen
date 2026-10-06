@@ -1712,6 +1712,9 @@
         
     </div> -->
 
+    <!-- Flying Wishes Layer -->
+    <div class="flying-layer" id="flyingLayer" aria-hidden="true"></div>
+
     <!-- Floating Hearts Background -->
     <div class="hearts-container">
         <div class="heart">💕</div>
@@ -2111,6 +2114,108 @@
             <img src="images/2.jpg" alt="Wedding" style="width: 100%; max-width: 800px; height: auto; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 25px rgba(196, 30, 58, 0.3)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
         </div> -->
 
+        <!-- RSVP - Xác nhận tham dự -->
+        <section class="section scroll-reveal">
+            <div style="text-align: center; padding: 40px 20px;">
+                <h2 style="font-family: 'Dancing Script', cursive; font-size: 32px; color: #c41e3a; margin-bottom: 20px;">Xác Nhận Tham Dự</h2>
+                <div class="rsvp-intro">
+                    <p>Sự hiện diện của bạn là niềm vui và vinh hạnh lớn nhất của chúng tôi.</p>
+                    <p style="color: #666;">Vui lòng <strong style="color: #c41e3a;">xác nhận tham dự</strong> để cô dâu chú rể sắp xếp chỗ ngồi chu đáo nhất.</p>
+                </div>
+
+                <div class="rsvp-form" id="rsvpFormWrap">
+                    <form id="rsvpForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><span class="required">*</span>Họ và tên</label>
+                                <input type="text" id="rsvpName" placeholder="Tên của bạn" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="tel" id="rsvpPhone" placeholder="Số điện thoại (nếu có)">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="rsvpEmail" placeholder="Email (nếu có)">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><span class="required">*</span>Bạn có tham dự được không?</label>
+                            <div class="rsvp-choices">
+                                <label class="rsvp-choice">
+                                    <input type="radio" name="attending" value="yes">
+                                    <span>💕 Tôi sẽ tham dự</span>
+                                </label>
+                                <label class="rsvp-choice">
+                                    <input type="radio" name="attending" value="no">
+                                    <span>💔 Tiếc vì không tham dự được</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="guestCountGroup" style="display: none;">
+                            <label>Số lượng người tham dự</label>
+                            <select id="rsvpGuests">
+                                <option value="1">1 người</option>
+                                <option value="2">2 người</option>
+                                <option value="3">3 người</option>
+                                <option value="4">4 người</option>
+                                <option value="5">5 người</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ghi chú</label>
+                            <textarea id="rsvpNote" rows="3" placeholder="Lời nhắn cho cô dâu chú rể (nếu có)"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary btn-submit">
+                            <span class="btn-text">Gửi xác nhận 💌</span>
+                            <span class="btn-loader"></span>
+                        </button>
+                    </form>
+
+                    <div class="success-message" id="rsvpSuccess">
+                        <div class="success-icon">✓</div>
+                        <h3>Cảm ơn bạn!</h3>
+                        <p>Chúng tôi đã nhận được xác nhận của bạn. Hẹn gặp bạn trong ngày vui! 💕</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lời chúc -->
+        <section class="section scroll-reveal">
+            <div style="text-align: center; padding: 40px 20px;">
+                <h2 style="font-family: 'Dancing Script', cursive; font-size: 32px; color: #c41e3a; margin-bottom: 20px;">Lời Chúc</h2>
+                <p style="color: #666; font-size: 1.05rem; max-width: 600px; margin: 0 auto 10px;">
+                    Gửi những lời chúc phúc tốt đẹp nhất đến cô dâu chú rể. Lời chúc của bạn sẽ bay ngang màn hình và hiển thị tại đây! 💐
+                </p>
+
+                <form class="wish-form" id="wishForm" novalidate>
+                    <div class="form-group">
+                        <label><span class="required">*</span>Tên người chúc</label>
+                        <input type="text" id="wishName" maxlength="50" placeholder="Tên của bạn">
+                    </div>
+                    <div class="form-group">
+                        <label><span class="required">*</span>Lời chúc</label>
+                        <textarea id="wishMessage" maxlength="300" placeholder="Chúc cô dâu chú rể trăm năm hạnh phúc... 💕"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary btn-submit" id="wishSubmitBtn">
+                        <span class="btn-text">Gửi lời chúc 💌</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                </form>
+
+                <div class="wishes-wall">
+                    <h3 class="wishes-title">Lời Chúc Từ Gia Đình &amp; Bạn Bè</h3>
+                    <div class="wishes-list" id="wishesList"></div>
+                    <p class="wishes-empty" id="wishesEmpty">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc! 💕</p>
+                </div>
+            </div>
+        </section>
+
         <section class="section scroll-reveal">
             <div style="text-align: center; padding: 40px 20px;">
                 <h2 style="font-family: 'Dancing Script', cursive; font-size: 32px; color: #c41e3a; margin-bottom: 30px;">Gửi Mừng Cưới</h2>
@@ -2506,5 +2611,9 @@
             }, 2000);
         });
     </script>
+
+    <!-- Cấu hình (backend Google Sheet) & tính năng RSVP + Lời chúc -->
+    <script src="config.js"></script>
+    <script src="js/rsvp-wishes.js"></script>
 </body>
 </html>

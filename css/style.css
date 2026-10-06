@@ -1121,9 +1121,7 @@ body {
 
 .footer-content {
     max-width: 800px;
-   
-
-
+}
 
 .footer h3 {
     font-family: 'Playfair Display', serif;
@@ -1525,4 +1523,204 @@ body {
 
 .hidden {
     display: none;
+}
+
+/* ===================================
+   RSVP FORM - XÁC NHẬN THAM DỰ
+   =================================== */
+/* Sửa màu từ CSS var đang bị đè trắng -> màu đỏ chủ đạo #c41e3a */
+.rsvp-intro strong {
+    color: #c41e3a;
+}
+
+.rsvp-form .btn-primary,
+.wish-form .btn-primary {
+    background: linear-gradient(135deg, #c41e3a, #8b0000);
+    color: #ffffff;
+}
+
+.rsvp-form .success-message h3 {
+    color: #c41e3a;
+}
+
+/* Lựa chọn Tham dự / Không tham dự */
+.rsvp-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.rsvp-choice {
+    flex: 1;
+    min-width: 200px;
+    cursor: pointer;
+    position: relative;
+}
+
+.rsvp-choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.rsvp-choice span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #666666;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.rsvp-choice input:checked + span {
+    border-color: #c41e3a;
+    background: #fff0f2;
+    color: #c41e3a;
+    box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.12);
+}
+
+@media (max-width: 480px) {
+    .rsvp-choice span {
+        white-space: normal;
+        font-size: 0.95rem;
+    }
+}
+
+/* ===================================
+   WISHES - FORM + TƯỜNG CHÚC
+   =================================== */
+.wish-form {
+    max-width: 700px;
+    margin: 30px auto 0;
+    background: linear-gradient(135deg, #fef5f7 0%, #ffffff 100%);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    text-align: left;
+}
+
+.wish-form .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Sửa màu chữ từ CSS var đang bị đè trắng */
+.wishes-wall .wishes-title {
+    color: #c41e3a;
+}
+
+.wish-form .wishes-title,
+.wish-content h4 {
+    color: #c41e3a;
+}
+
+.wishes-empty {
+    text-align: center;
+    color: #999999;
+    padding: 30px 0;
+    font-style: italic;
+}
+
+/* Lời chúc mới thêm vào thì làm hiệu ứng xuất hiện */
+.wish-item.is-new {
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   FLYING WISHES - LỜI CHÚC BAY NGANG
+   =================================== */
+.flying-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 9000;
+}
+
+.flying-wish {
+    position: absolute;
+    left: 0;
+    width: max-content;
+    max-width: min(420px, 80vw);
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    background: linear-gradient(135deg, #ffffff, #fff5f7);
+    border: 1px solid #f0d9dd;
+    border-radius: 18px;
+    padding: 14px 22px;
+    box-shadow: 0 8px 30px rgba(196, 30, 58, 0.18);
+    transform: translateX(-30vw) rotate(-8deg);
+}
+
+.flying-wish::before {
+    content: '💌';
+    flex-shrink: 0;
+}
+
+.flying-wish-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #c41e3a;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.flying-wish-message {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
+    color: #555555;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media (max-width: 480px) {
+    .flying-wish {
+        max-width: 90vw;
+        padding: 10px 14px;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .flying-wish-name {
+        font-size: 1.1rem;
+    }
+
+    .flying-wish-message {
+        font-size: 0.85rem;
+    }
+}
+
+/* Tôn trọng cài đặt giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+    .flying-wish {
+        animation: none !important;
+    }
 }

@@ -157,6 +157,16 @@ Mở file `css/style.css` và sửa dòng 8-14:
 2. Import project
 3. Deploy!
 
+## 📥 Lưu RSVP & Lời chúc (Google Sheet)
+
+Website là static (không server) → dùng **Google Apps Script + Google Sheet** miễn phí để lưu
+Xác nhận tham dự + Lời chúc.
+
+👉 Làm đúng theo file **[GOOGLE-SHEET-HUONG-DAN.md](./GOOGLE-SHEET-HUONG-DAN.md)**:
+tạo Sheet → dán `google-apps-script/Code.gs` → Deploy Web App (Anyone) → dán URL vào `config.js` → `backend.appsScriptUrl`.
+
+Xong đó mọi RSVP + Lời chúc tự vào Sheet. Lời chúc gửi đi sẽ **bay ngang màn hình** và hiện trên tường chúc.
+
 ## 🆘 Gặp vấn đề?
 
 ### Hình ảnh không hiển thị

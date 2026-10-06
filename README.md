@@ -20,10 +20,11 @@ Một website thiệp cưới trực tuyến đẹp mắt, hiện đại với �
    - Đếm ngược thời gian đến ngày cưới
    - Tích hợp Google Maps
 4. **Gallery Section**: Bộ sưu tập ảnh với lightbox
-5. **RSVP Section**: Form xác nhận tham dự
+5. **RSVP Section**: Form xác nhận tham dự / từ chối → ghi vào **Google Sheet**
 6. **Wishes Section**: 
-   - Thông tin chuyển khoản với QR code
-   - Tường lời chúc
+   - Form gửi lời chúc + tên người chúc
+   - Lời chúc **bay ngang màn hình** sau khi gửi
+   - Tường lời chúc (đồng bộ qua Google Sheet)
 7. **Footer**: Thông tin liên hệ và social links
 
 ### 🎵 Tính năng tương tác
@@ -41,10 +42,14 @@ Một website thiệp cưới trực tuyến đẹp mắt, hiện đại với �
 ```
 wedding/
 ├── index.html          # File HTML chính
+├── config.js           # Cấu hình: cặp đôi, ngày cưới, backend Google Sheet
 ├── css/
 │   └── style.css      # File CSS với đầy đủ styling
 ├── js/
-│   └── main.js        # File JavaScript với các tính năng
+│   ├── main.js        # File JavaScript với các tính năng cũ
+│   └── rsvp-wishes.js # RSVP + Lời chúc (gửi Google Sheet, bay ngang màn hình)
+├── google-apps-script/
+│   └── Code.gs        # Backend Google Apps Script (RSVP + Lời chúc)
 ├── images/            # Thư mục chứa hình ảnh
 │   ├── photo1.jpg
 │   ├── photo2.jpg
@@ -231,11 +236,25 @@ firebase init hosting
 firebase deploy
 ```
 
+## 📥 Lưu RSVP & Lời chúc vào Google Sheet
+
+Website là static (không có server) nên dữ liệu Xác nhận tham dự + Lời chúc được ghi vào
+**Google Sheet** qua **Google Apps Script** (miễn phí).
+
+👉 Làm theo từng bước trong file **[GOOGLE-SHEET-HUONG-DAN.md](./GOOGLE-SHEET-HUONG-DAN.md)**.
+
+Tóm tắt:
+1. Tạo Google Sheet trống → Extensions → Apps Script.
+2. Dán nội dung `google-apps-script/Code.gs` → Deploy Web App (**Anyone** access).
+3. Copy URL `/exec` dán vào `config.js` → `backend.appsScriptUrl`.
+4. Xong — mọi RSVP + Lời chúc tự động ghi vào Sheet.
+
 ## 📝 Checklist trước khi publish
 
 - [ ] Đã thay đổi tất cả thông tin cá nhân
 - [ ] Đã thêm đầy đủ hình ảnh (6 ảnh + QR code)
 - [ ] Đã thêm file nhạc nền
+- [ ] Đã cấu hình backend Google Sheet (xem GOOGLE-SHEET-HUONG-DAN.md)
 - [ ] Đã test trên mobile/tablet/desktop
 - [ ] Đã test form RSVP
 - [ ] Đã set đúng ngày cưới trong countdown

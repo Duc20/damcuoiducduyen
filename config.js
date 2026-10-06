@@ -137,6 +137,18 @@ const weddingConfig = {
     },
 
     // ==========================================
+    // BACKEND - GOOGLE SHEET (RSVP + LỜI CHÚC)
+    // ==========================================
+    // Xem file GOOGLE-SHEET-HUONG-DAN.md để biết cách tạo
+    // và deploy Google Apps Script. Sau khi deploy, dán
+    // URL dạng https://script.google.com/macros/s/.../exec vào dưới.
+    backend: {
+        appsScriptUrl: "https://script.google.com/macros/s/AKfycbzl-9z5gVdMct-IDR0yCIMOBldt_UdpEewfHGHsHyCZXS83kIIT8TD-7jPHcIHXDImM/exec", // THAY ĐỔI: URL web app sau khi deploy
+        maxWishesLoaded: 100,       // Số lời chúc tối đa hiển thị trên tường chúc
+        pollIntervalMs: 30000        // Thời gian (ms) làm mới lời chúc của khách khác (30 giây)
+    },
+
+    // ==========================================
     // MẠNG XÃ HỘI
     // ==========================================
     social: {
