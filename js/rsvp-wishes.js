@@ -4,7 +4,8 @@
  * ============================================
  * - Form xác nhận tham dự / từ chối -> Google Sheet (RSVP)
  * - Form lời chúc -> Google Sheet (Lời chúc)
- * - Lời chúc vừa gửi BAY NGANG màn hình + xuất hiện trên tường chúc
+ * - Lời chúc vừa gửi + toàn bộ lời chúc BAY NGANG màn hình
+ *   (đường bay ngẫu nhiên, kích hoạt 1 lần khi lướt tới khu vực lời chúc)
  *
  * Backend: Google Apps Script (xem google-apps-script/Code.gs
  *          và GOOGLE-SHEET-HUONG-DAN.md)
@@ -335,11 +336,36 @@
         wishes = merged.slice(0, WISHES_LIMIT);
         writeLocal(WISHES_CACHE_KEY, wishes);
         renderWishes();
+        maybeRunPendingFlyShow();
     }
 
     // ============================================
     // HIỆU ỨNG LỜI CHÚC BAY NGANG MÀN HÌNH
     // ============================================
+    // Vùng bay theo chiều cao (% viewport) - phù hợp màn hình dọc điện thoại,
+    // chừa thanh trạng thái/notch phía trên & thanh điều hướng phía dưới
+    var FLY_BAND_TOP = 15;
+    var FLY_BAND_BOTTOM = 75;
+    // Khoảng nghỉ ngẫu nhiên giữa 2 lời chúc (ms): 3 - 6 giây
+    // (đổi từ 1.5-3s theo tỉ lệ tốc độ bay, giữ nhịp như ban đầu)
+    var FLY_GAP_MIN = 2000;
+    var FLY_GAP_RANGE = 2000;
+
+    function rand(min, max) {
+        return min + Math.random() * (max - min);
+    }
+
+    // Số ngẫu nhiên trong khoảng, làm tròn 1 chữ số thập phân
+    function rand1(min, max) {
+        return Math.round(rand(min, max) * 10) / 10;
+    }
+
+    function clampNum(v, min, max) {
+        return v < min ? min : (v > max ? max : v);
+    }
+
+    // Đường bay ngẫu nhiên: Y lượn qua các mốc ngẫu nhiên (không thẳng hàng),
+    // góc nghiêng & quãng đường X đầu vào cũng ngẫu nhiên cho từng lời chúc
     function flyWish(wish) {
         if (!ENABLE_FLY) return;
 
@@ -360,27 +386,108 @@
         el.appendChild(nameEl);
         el.appendChild(msgEl);
 
-        // Chọn 1 trong 5 "lane" chiều cao để tránh trùng nhau
-        var lanes = [12, 26, 40, 54, 68];
-        var lane = lanes[Math.floor(Math.random() * lanes.length)];
-        var duration = 6000 + Math.random() * 4000; // 6 - 10 giây
-        var startX = Math.round(-(30 + Math.random() * 15)); // -30vw ~ -45vw
+        // Toạ độ Y xuất phát ngẫu nhiên trong vùng bay
+        var y0 = rand(FLY_BAND_TOP, FLY_BAND_BOTTOM);
 
-        el.style.top = lane + '%';
+        // 3 mốc Y tiếp theo (tương đối, đơn vị vh) - ngẫu nhiên, luôn nằm trong band
+        function relDelta(absY) {
+            return Math.round((absY - y0) * 10) / 10;
+        }
+        var y1 = relDelta(clampNum(rand(y0 - 14, y0 + 14), FLY_BAND_TOP, FLY_BAND_BOTTOM));
+        var y2 = relDelta(clampNum(rand(y0 - 12, y0 + 12), FLY_BAND_TOP, FLY_BAND_BOTTOM));
+        var y3 = relDelta(clampNum(rand(y0 - 10, y0 + 10), FLY_BAND_TOP, FLY_BAND_BOTTOM));
+
+        // Góc nghiêng ngẫu nhiên cho từng lời chúc
+        var r0 = rand1(-10, 10);
+        var r1 = rand1(-8, 8);
+        var r2 = rand1(-8, 8);
+        var r3 = rand1(-10, 10);
+
+        var startX = Math.round(-rand(30, 55)); // -30vw ~ -55vw
+        var duration = Math.round(rand(12000, 20000)); // 12 - 20 giây (tốc độ bay chậm bằng 1/2)
+
+        el.style.top = y0 + '%';
+        // Trạng thái ban đầu ngoài màn hình, tránh "nhảy" 1 frame trước khi animate
+        el.style.transform = 'translate(' + startX + 'vw, 0vh) rotate(' + r0 + 'deg)';
+        el.style.opacity = '0';
         layer.appendChild(el);
 
         el.animate([
-            { transform: 'translateX(' + startX + 'vw) rotate(-8deg)', opacity: 0 },
-            { transform: 'translateX(' + startX + 'vw) rotate(-4deg)', opacity: 0, offset: 0.02 },
-            { transform: 'translateX(5vw) rotate(-2deg)', opacity: 1, offset: 0.15 },
-            { transform: 'translateX(60vw) rotate(3deg)', opacity: 1, offset: 0.72 },
-            { transform: 'translateX(135vw) rotate(8deg)', opacity: 0, offset: 1 }
+            { transform: 'translate(' + startX + 'vw, 0vh) rotate(' + r0 + 'deg)', opacity: 0 },
+            { transform: 'translate(' + Math.round(startX * 0.5) + 'vw, ' + y1 + 'vh) rotate(' + r1 + 'deg)', opacity: 1, offset: 0.14 },
+            { transform: 'translate(45vw, ' + y2 + 'vh) rotate(' + r2 + 'deg)', opacity: 1, offset: 0.55 },
+            { transform: 'translate(140vw, ' + y3 + 'vh) rotate(' + r3 + 'deg)', opacity: 0, offset: 1 }
         ], {
             duration: duration,
             easing: 'linear'
         }).onfinish = function () {
             el.remove();
         };
+    }
+
+    // Bay lần lượt TẤT CẢ lời chúc, cách nhau khoảng nghỉ ngẫu nhiên (3 - 6 giây)
+    // (nhịp không đều, lời chúc sau có thể bay khi lời trước đang bay dở)
+    function flyAllWishes(list) {
+        if (!ENABLE_FLY || !list || !list.length) return;
+
+        var i = 0;
+        function next() {
+            if (i >= list.length) return;
+            flyWish(list[i]);
+            i++;
+            setTimeout(next, Math.round(rand(FLY_GAP_MIN, FLY_GAP_MIN + FLY_GAP_RANGE)));
+        }
+        next();
+    }
+
+    // ============================================
+    // KÍCH HOẠT 1 LẦN KHI LƯỚT TỚI KHU VỰC LỜI CHÚC
+    // ============================================
+    var flyShowTriggered = false;
+    var flyShowPending = false;
+
+    function triggerFlyShow() {
+        if (flyShowTriggered) return;
+        flyShowTriggered = true;
+        if (flyShowObserver) {
+            flyShowObserver.disconnect();
+            flyShowObserver = null;
+        }
+
+        if (wishes.length) {
+            flyAllWishes(wishes.slice());
+        } else {
+            // Chưa tải xong dữ liệu -> bay ngay sau lần nạp đầu tiên
+            flyShowPending = true;
+        }
+    }
+
+    var flyShowObserver = null;
+
+    // Nếu người dùng đã lướt tới khu vực lời chúc khi dữ liệu còn rỗng ->
+    // chạy show ngay khi có lời chúc đầu tiên
+    function maybeRunPendingFlyShow() {
+        if (flyShowPending && wishes.length) {
+            flyShowPending = false;
+            flyAllWishes(wishes.slice());
+        }
+    }
+
+    function initFlyShowTrigger() {
+        if (!ENABLE_FLY || !('IntersectionObserver' in window)) return;
+
+        var target = document.querySelector('.wishes-wall');
+        if (!target) return;
+
+        flyShowObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    triggerFlyShow();
+                }
+            });
+        }, { threshold: 0.15 });
+
+        flyShowObserver.observe(target);
     }
 
     // ============================================
@@ -449,12 +556,14 @@
     onReady(function () {
         initRSVP();
         initWishesForm();
+        initFlyShowTrigger();
 
         // Nạp lời chúc: cache local trước (nhanh), rồi cập nhật từ server
         var cached = loadWishesCache();
         if (cached.length) {
             wishes = cached.slice(0, WISHES_LIMIT);
             renderWishes();
+            maybeRunPendingFlyShow();
         }
 
         loadWishesFromServer(function (serverWishes) {

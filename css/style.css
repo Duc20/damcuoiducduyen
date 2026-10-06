@@ -1673,7 +1673,6 @@ body {
     border-radius: 18px;
     padding: 14px 22px;
     box-shadow: 0 8px 30px rgba(196, 30, 58, 0.18);
-    transform: translateX(-30vw) rotate(-8deg);
 }
 
 .flying-wish::before {
